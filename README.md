@@ -81,13 +81,15 @@ sendSms().catch(console.error);
 
 ## API Reference
 
-Generate API documentation locally:
+Full API documentation: **https://bsgworld.github.io/js-sdk/**
+
+Documentation is also available locally in the `docs/` folder (generated with [TypeDoc](https://typedoc.org/)).
+
+To regenerate documentation:
 
 ```bash
 npm run docs
 ```
-
-This creates HTML documentation in `docs/` folder using [TypeDoc](https://typedoc.org/).
 
 ### Available API Classes
 
