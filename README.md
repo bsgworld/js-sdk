@@ -1,13 +1,13 @@
-# bsg-js-sdk
+# @bsgworld/js-sdk
 
 BSG JavaScript/TypeScript SDK for One-API.
 
 ## Installation
 
 ```bash
-npm install bsg-js-sdk
+npm install @bsgworld/js-sdk
 # or
-yarn add bsg-js-sdk
+yarn add @bsgworld/js-sdk
 ```
 
 ### Requirements
@@ -18,7 +18,7 @@ yarn add bsg-js-sdk
 ## Getting Started
 
 ```typescript
-import { Configuration, AuthApi, CampaignSMSApi } from 'bsg-js-sdk';
+import { Configuration, AuthApi, CampaignSMSApi } from '@bsgworld/js-sdk';
 
 // 1. Authenticate - get JWT token
 const authApi = new AuthApi();
@@ -50,7 +50,7 @@ console.log('Campaign ID:', smsResponse.data.id);
 ### CommonJS Usage
 
 ```javascript
-const { Configuration, AuthApi, CampaignSMSApi } = require('bsg-js-sdk');
+const { Configuration, AuthApi, CampaignSMSApi } = require('@bsgworld/js-sdk');
 
 async function sendSms() {
     // 1. Get JWT token
@@ -81,9 +81,7 @@ sendSms().catch(console.error);
 
 ## API Reference
 
-Full API documentation: **https://bsgworld.github.io/js-sdk/**
-
-Documentation is also available locally in the `docs/` folder (generated with [TypeDoc](https://typedoc.org/)).
+Documentation is available locally in the `docs/` folder (generated with [TypeDoc](https://typedoc.org/)).
 
 To regenerate documentation:
 

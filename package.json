@@ -1,5 +1,5 @@
 {
-  "name": "bsg-js-sdk",
+  "name": "@bsgworld/js-sdk",
   "version": "0.1.0",
   "description": "BSG JavaScript/TypeScript SDK for One-API",
   "main": "dist/index.js",
