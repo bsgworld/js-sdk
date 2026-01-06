@@ -1,0 +1,26 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "name": "BSG JavaScript/TypeScript SDK",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "skipErrorChecking": true,
+  "navigationLinks": {
+    "BSG Developers": "https://bsg.world/developers",
+    "GitHub": "https://github.com/bsgworld/js-sdk"
+  },
+  "githubPages": true,
+  "plugin": [],
+  "categorizeByGroup": true,
+  "sort": ["alphabetical"],
+  "visibilityFilters": {
+    "protected": false,
+    "private": false,
+    "inherited": true,
+    "external": false
+  }
+}

@@ -1,0 +1,548 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>BSG JavaScript/TypeScript SDK - v0.1.0</title><meta name="description" content="Documentation for BSG JavaScript/TypeScript SDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"><a href="https://bsg.world/developers">BSG Developers</a><a href="https://github.com/bsgworld/js-sdk">GitHub</a></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">BSG JavaScript/TypeScript SDK - v0.1.0</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>BSG JavaScript/TypeScript SDK - v0.1.0</h1></div><div class="tsd-panel tsd-typography"><a id="bsg-js-sdk" class="tsd-anchor"></a><h1 class="tsd-anchor-link">bsg-js-sdk<a href="#bsg-js-sdk" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>BSG JavaScript/TypeScript SDK for One-API.</p>
+<a id="installation" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">bsg-js-sdk</span><br/><span class="hl-3"># or</span><br/><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">bsg-js-sdk</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="requirements" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Requirements<a href="#requirements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li>Node.js 16 or later</li>
+<li>TypeScript 4.7+ (for TypeScript projects)</li>
+</ul>
+<a id="getting-started" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Getting Started<a href="#getting-started" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="typescript"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">Configuration</span><span class="hl-1">, </span><span class="hl-5">AuthApi</span><span class="hl-1">, </span><span class="hl-5">CampaignSMSApi</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&#39;bsg-js-sdk&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// 1. Authenticate - get JWT token</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">authApi</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">AuthApi</span><span class="hl-1">();</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">loginResponse</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">authApi</span><span class="hl-1">.</span><span class="hl-0">login</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">api_key:</span><span class="hl-1"> </span><span class="hl-2">&#39;live_XXXXXXXXXXXXXXXXXXXX&#39;</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">token</span><span class="hl-1"> = </span><span class="hl-5">loginResponse</span><span class="hl-1">.</span><span class="hl-5">data</span><span class="hl-1">.</span><span class="hl-5">bearer</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// 2. Configure client with JWT token</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">config</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Configuration</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">basePath:</span><span class="hl-1"> </span><span class="hl-2">&#39;https://one-api.bsg.world&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">accessToken:</span><span class="hl-1"> </span><span class="hl-5">token</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-3">// 3. Send SMS</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">smsApi</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">CampaignSMSApi</span><span class="hl-1">(</span><span class="hl-5">config</span><span class="hl-1">);</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">smsResponse</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">smsApi</span><span class="hl-1">.</span><span class="hl-0">smsSend</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">phones:</span><span class="hl-1"> </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Set</span><span class="hl-1">([{ </span><span class="hl-5">number:</span><span class="hl-1"> </span><span class="hl-8">380661234567</span><span class="hl-1"> }]),</span><br/><span class="hl-1">    </span><span class="hl-5">sender:</span><span class="hl-1"> </span><span class="hl-2">&#39;BSG&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">text:</span><span class="hl-1"> </span><span class="hl-2">&#39;Hello from BSG!&#39;</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">&#39;Campaign ID:&#39;</span><span class="hl-1">, </span><span class="hl-5">smsResponse</span><span class="hl-1">.</span><span class="hl-5">data</span><span class="hl-1">.</span><span class="hl-5">id</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="commonjs-usage" class="tsd-anchor"></a><h3 class="tsd-anchor-link">CommonJS Usage<a href="#commonjs-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="javascript"><span class="hl-6">const</span><span class="hl-1"> { </span><span class="hl-7">Configuration</span><span class="hl-1">, </span><span class="hl-7">AuthApi</span><span class="hl-1">, </span><span class="hl-7">CampaignSMSApi</span><span class="hl-1"> } = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&#39;bsg-js-sdk&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-6">async</span><span class="hl-1"> </span><span class="hl-6">function</span><span class="hl-1"> </span><span class="hl-0">sendSms</span><span class="hl-1">() {</span><br/><span class="hl-1">    </span><span class="hl-3">// 1. Get JWT token</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">authApi</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">AuthApi</span><span class="hl-1">();</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">loginResponse</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">authApi</span><span class="hl-1">.</span><span class="hl-0">login</span><span class="hl-1">({</span><br/><span class="hl-1">        </span><span class="hl-5">api_key:</span><span class="hl-1"> </span><span class="hl-2">&#39;live_XXXXXXXXXXXXXXXXXXXX&#39;</span><br/><span class="hl-1">    });</span><br/><br/><span class="hl-1">    </span><span class="hl-3">// 2. Configure with token</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">config</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Configuration</span><span class="hl-1">({</span><br/><span class="hl-1">        </span><span class="hl-5">basePath:</span><span class="hl-1"> </span><span class="hl-2">&#39;https://one-api.bsg.world&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">accessToken:</span><span class="hl-1"> </span><span class="hl-5">loginResponse</span><span class="hl-1">.</span><span class="hl-5">data</span><span class="hl-1">.</span><span class="hl-5">bearer</span><br/><span class="hl-1">    });</span><br/><br/><span class="hl-1">    </span><span class="hl-3">// 3. Send SMS</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">smsApi</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">CampaignSMSApi</span><span class="hl-1">(</span><span class="hl-5">config</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">response</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">smsApi</span><span class="hl-1">.</span><span class="hl-0">smsSend</span><span class="hl-1">({</span><br/><span class="hl-1">        </span><span class="hl-5">phones:</span><span class="hl-1"> </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Set</span><span class="hl-1">([{ </span><span class="hl-5">number:</span><span class="hl-1"> </span><span class="hl-8">380661234567</span><span class="hl-1"> }]),</span><br/><span class="hl-1">        </span><span class="hl-5">sender:</span><span class="hl-1"> </span><span class="hl-2">&#39;BSG&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">text:</span><span class="hl-1"> </span><span class="hl-2">&#39;Hello from BSG!&#39;</span><br/><span class="hl-1">    });</span><br/><br/><span class="hl-1">    </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">&#39;Campaign ID:&#39;</span><span class="hl-1">, </span><span class="hl-5">response</span><span class="hl-1">.</span><span class="hl-5">data</span><span class="hl-1">.</span><span class="hl-5">id</span><span class="hl-1">);</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">sendSms</span><span class="hl-1">().</span><span class="hl-0">catch</span><span class="hl-1">(</span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-5">error</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="api-reference" class="tsd-anchor"></a><h2 class="tsd-anchor-link">API Reference<a href="#api-reference" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Generate API documentation locally:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">docs</span>
+</code><button type="button">Copy</button></pre>
+
+<p>This creates HTML documentation in <code>docs/</code> folder using <a href="https://typedoc.org/">TypeDoc</a>.</p>
+<a id="available-api-classes" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Available API Classes<a href="#available-api-classes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AuthApi</code></td>
+<td>Authentication - login, token refresh</td>
+</tr>
+<tr>
+<td><code>BalanceApi</code></td>
+<td>Account balance and tariffs</td>
+</tr>
+<tr>
+<td><code>CampaignSMSApi</code></td>
+<td>Send SMS campaigns</td>
+</tr>
+<tr>
+<td><code>CampaignRCSApi</code></td>
+<td>Send RCS messages</td>
+</tr>
+<tr>
+<td><code>CampaignWhatsAppApi</code></td>
+<td>Send WhatsApp messages</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td>Manage contacts</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td>Manage contact lists</td>
+</tr>
+<tr>
+<td><code>SendersApi</code></td>
+<td>Manage sender names</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td>Two-factor authentication (OTP)</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td>URL shortener</td>
+</tr>
+</tbody>
+</table>
+<a id="all-endpoints" class="tsd-anchor"></a><h3 class="tsd-anchor-link">All Endpoints<a href="#all-endpoints" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>All URIs are relative to <em><a href="https://one-api.bsg.world">https://one-api.bsg.world</a></em></p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AccountSettingsApi</code></td>
+<td><code>getSettingsAddressBookFieldsById</code></td>
+<td><strong>GET</strong> /api/settings/address-book-fields/{id}</td>
+<td>Get settings value</td>
+</tr>
+<tr>
+<td><code>AuthApi</code></td>
+<td><code>login</code></td>
+<td><strong>POST</strong> /api/auth/login</td>
+<td>Receive JWT token</td>
+</tr>
+<tr>
+<td><code>AuthApi</code></td>
+<td><code>refreshToken</code></td>
+<td><strong>POST</strong> /api/auth/refresh</td>
+<td>Refresh JWT token</td>
+</tr>
+<tr>
+<td><code>BalanceApi</code></td>
+<td><code>accountBalance</code></td>
+<td><strong>GET</strong> /api/accounts/balance</td>
+<td>Get balance</td>
+</tr>
+<tr>
+<td><code>BalanceApi</code></td>
+<td><code>accountTariffs</code></td>
+<td><strong>GET</strong> /api/accounts/tariff</td>
+<td>Get tariffs</td>
+</tr>
+<tr>
+<td><code>CampaignApi</code></td>
+<td><code>campaign</code></td>
+<td><strong>GET</strong> /api/campaigns/{id}</td>
+<td>Get campaign info</td>
+</tr>
+<tr>
+<td><code>CampaignApi</code></td>
+<td><code>campaignDetails</code></td>
+<td><strong>GET</strong> /api/campaigns/{id}/detail</td>
+<td>Get campaign details</td>
+</tr>
+<tr>
+<td><code>CampaignApi</code></td>
+<td><code>campaignPrice</code></td>
+<td><strong>POST</strong> /api/campaigns/price</td>
+<td>Calculate campaign price</td>
+</tr>
+<tr>
+<td><code>CampaignApi</code></td>
+<td><code>campaignStop</code></td>
+<td><strong>PATCH</strong> /api/campaigns/{id}/stop</td>
+<td>Cancel campaign</td>
+</tr>
+<tr>
+<td><code>CampaignApi</code></td>
+<td><code>campaigns</code></td>
+<td><strong>GET</strong> /api/campaigns</td>
+<td>List of campaigns</td>
+</tr>
+<tr>
+<td><code>CampaignRCSApi</code></td>
+<td><code>rcsSend</code></td>
+<td><strong>POST</strong> /api/campaigns/rcs/send</td>
+<td>Send RCS message</td>
+</tr>
+<tr>
+<td><code>CampaignRCSApi</code></td>
+<td><code>rcsSendGroups</code></td>
+<td><strong>POST</strong> /api/campaigns/rcs/send-groups</td>
+<td>Send RCS message to contact list</td>
+</tr>
+<tr>
+<td><code>CampaignRCSApi</code></td>
+<td><code>rcsSingle</code></td>
+<td><strong>POST</strong> /api/messages/rcs/send</td>
+<td>Send single RCS message</td>
+</tr>
+<tr>
+<td><code>CampaignSMSApi</code></td>
+<td><code>smsSend</code></td>
+<td><strong>POST</strong> /api/campaigns/sms/send</td>
+<td>Send SMS campaign</td>
+</tr>
+<tr>
+<td><code>CampaignSMSApi</code></td>
+<td><code>smsSendGroups</code></td>
+<td><strong>POST</strong> /api/campaigns/sms/send-groups</td>
+<td>Send SMS to contact list</td>
+</tr>
+<tr>
+<td><code>CampaignSMSApi</code></td>
+<td><code>smsSendIndividual</code></td>
+<td><strong>POST</strong> /api/campaigns/sms/send-individual</td>
+<td>Send SMS with different text</td>
+</tr>
+<tr>
+<td><code>CampaignWhatsAppApi</code></td>
+<td><code>postCampaignsWhatsappSend</code></td>
+<td><strong>POST</strong> /api/campaigns/whatsapp/send</td>
+<td>Send WhatsApp campaign</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contact</code></td>
+<td><strong>GET</strong> /api/contacts/{id}</td>
+<td>Get contact by ID</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contactCreate</code></td>
+<td><strong>POST</strong> /api/contacts</td>
+<td>Create a contact</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contactDelete</code></td>
+<td><strong>DELETE</strong> /api/contacts/{id}</td>
+<td>Delete contact</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contactUpdate</code></td>
+<td><strong>PUT</strong> /api/contacts/{id}</td>
+<td>Update contact</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contacts</code></td>
+<td><strong>GET</strong> /api/contacts</td>
+<td>List of contacts</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contactsDelete</code></td>
+<td><strong>POST</strong> /api/contacts/delete</td>
+<td>Delete multiple contacts</td>
+</tr>
+<tr>
+<td><code>ContactApi</code></td>
+<td><code>contactsSearch</code></td>
+<td><strong>GET</strong> /api/contacts/search</td>
+<td>Search contacts</td>
+</tr>
+<tr>
+<td><code>ContactFieldApi</code></td>
+<td><code>contactFieldCreate</code></td>
+<td><strong>POST</strong> /api/contacts/fields</td>
+<td>Create contact field</td>
+</tr>
+<tr>
+<td><code>ContactFieldApi</code></td>
+<td><code>contactFieldUpdate</code></td>
+<td><strong>PATCH</strong> /api/contacts/fields/{id}</td>
+<td>Update contact field</td>
+</tr>
+<tr>
+<td><code>ContactFieldApi</code></td>
+<td><code>contactFields</code></td>
+<td><strong>GET</strong> /api/contacts/fields</td>
+<td>List of contact fields</td>
+</tr>
+<tr>
+<td><code>ContactFieldApi</code></td>
+<td><code>postContactsFieldsDelete</code></td>
+<td><strong>POST</strong> /api/contacts/fields/delete</td>
+<td>Delete contact fields by ids</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactList</code></td>
+<td><strong>GET</strong> /api/groups/{id}</td>
+<td>Get list by id</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListAttach</code></td>
+<td><strong>POST</strong> /api/groups/attach</td>
+<td>Add contacts to the list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListCreate</code></td>
+<td><strong>POST</strong> /api/groups</td>
+<td>Create list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListDelete</code></td>
+<td><strong>DELETE</strong> /api/groups/{id}</td>
+<td>Delete list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListDetach</code></td>
+<td><strong>POST</strong> /api/groups/detach</td>
+<td>Remove contacts from the list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListSearch</code></td>
+<td><strong>GET</strong> /api/groups/search</td>
+<td>Search list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactListUpdate</code></td>
+<td><strong>PUT</strong> /api/groups/{id}</td>
+<td>Update list</td>
+</tr>
+<tr>
+<td><code>ContactListApi</code></td>
+<td><code>contactLists</code></td>
+<td><strong>GET</strong> /api/groups</td>
+<td>List of contact lists</td>
+</tr>
+<tr>
+<td><code>EmailApi</code></td>
+<td><code>emailSend</code></td>
+<td><strong>POST</strong> /api/email/send-emails</td>
+<td>Send Email</td>
+</tr>
+<tr>
+<td><code>EmailApi</code></td>
+<td><code>emailTemplateSend</code></td>
+<td><strong>POST</strong> /api/email/send-template-emails</td>
+<td>Send Email template</td>
+</tr>
+<tr>
+<td><code>InternalCorePriceApi</code></td>
+<td><code>getInternalCorePrices</code></td>
+<td><strong>GET</strong> /api/internal/core/prices</td>
+<td>Get price list for each country</td>
+</tr>
+<tr>
+<td><code>InternalCorePriceApi</code></td>
+<td><code>getInternalCorePricesByCountryCode</code></td>
+<td><strong>GET</strong> /api/internal/core/prices/{countryCode}</td>
+<td>Get prices for country</td>
+</tr>
+<tr>
+<td><code>InternalCountryApi</code></td>
+<td><code>getInternalCountries</code></td>
+<td><strong>GET</strong> /api/internal/countries</td>
+<td>Get countries list</td>
+</tr>
+<tr>
+<td><code>InternalCurrencyApi</code></td>
+<td><code>getInternalCurrencies</code></td>
+<td><strong>GET</strong> /api/internal/currencies</td>
+<td>Get currencies list</td>
+</tr>
+<tr>
+<td><code>InternalTwoFAApi</code></td>
+<td><code>getInternal2faAuthenticationsFullPrice</code></td>
+<td><strong>GET</strong> /api/internal/2fa/authentications/full-price</td>
+<td>Show TwoFA authentication full price</td>
+</tr>
+<tr>
+<td><code>InternalWstPriceApi</code></td>
+<td><code>getInternalWstPrices</code></td>
+<td><strong>GET</strong> /api/internal/wst/prices</td>
+<td>Get price list for each country</td>
+</tr>
+<tr>
+<td><code>InternalWstPriceApi</code></td>
+<td><code>getInternalWstPricesByCountryCode</code></td>
+<td><strong>GET</strong> /api/internal/wst/prices/{countryCode}</td>
+<td>Get prices for country</td>
+</tr>
+<tr>
+<td><code>MessagesSMSApi</code></td>
+<td><code>getMessages</code></td>
+<td><strong>GET</strong> /api/messages</td>
+<td>Find messages</td>
+</tr>
+<tr>
+<td><code>MessagesWhatsAppApi</code></td>
+<td><code>whatsappSingle</code></td>
+<td><strong>POST</strong> /api/messages/whatsapp/send</td>
+<td>Send single WhatsApp message</td>
+</tr>
+<tr>
+<td><code>SendersApi</code></td>
+<td><code>senderRequestLegal</code></td>
+<td><strong>POST</strong> /api/senders/requests/legal</td>
+<td>Sender registration by a legal entity</td>
+</tr>
+<tr>
+<td><code>SendersApi</code></td>
+<td><code>senderRequestNatural</code></td>
+<td><strong>POST</strong> /api/senders/requests/natural</td>
+<td>Sender registration by an individual</td>
+</tr>
+<tr>
+<td><code>SendersApi</code></td>
+<td><code>senderRequests</code></td>
+<td><strong>GET</strong> /api/senders/requests/sms</td>
+<td>List of Sender Requests</td>
+</tr>
+<tr>
+<td><code>SendersApi</code></td>
+<td><code>senders</code></td>
+<td><strong>GET</strong> /api/senders</td>
+<td>List of Senders</td>
+</tr>
+<tr>
+<td><code>ShortDomainsApi</code></td>
+<td><code>shortUrlsDomain</code></td>
+<td><strong>GET</strong> /api/short-url/domains/{uuid}</td>
+<td>Get domain by uuid</td>
+</tr>
+<tr>
+<td><code>ShortDomainsApi</code></td>
+<td><code>shortUrlsDomainCreate</code></td>
+<td><strong>POST</strong> /api/short-url/domains</td>
+<td>Add domain</td>
+</tr>
+<tr>
+<td><code>ShortDomainsApi</code></td>
+<td><code>shortUrlsDomainRemove</code></td>
+<td><strong>DELETE</strong> /api/short-url/domains/{uuid}</td>
+<td>Remove domain</td>
+</tr>
+<tr>
+<td><code>ShortDomainsApi</code></td>
+<td><code>shortUrlsDomainUpdate</code></td>
+<td><strong>PUT</strong> /api/short-url/domains/{uuid}</td>
+<td>Update domain</td>
+</tr>
+<tr>
+<td><code>ShortDomainsApi</code></td>
+<td><code>shortUrlsDomains</code></td>
+<td><strong>GET</strong> /api/short-url/domains</td>
+<td>List of domains</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsClicks</code></td>
+<td><strong>GET</strong> /api/short-url/clicks</td>
+<td>List of clicks</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsLink</code></td>
+<td><strong>GET</strong> /api/short-url/links/{uuid}/statistics</td>
+<td>Get short link statistic</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsLinkCreate</code></td>
+<td><strong>POST</strong> /api/short-url/links</td>
+<td>Create short link</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsLinkDelete</code></td>
+<td><strong>DELETE</strong> /api/short-url/links/{uuid}</td>
+<td>Remove short link</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsLinkUpdate</code></td>
+<td><strong>PUT</strong> /api/short-url/links/{uuid}</td>
+<td>Update short link</td>
+</tr>
+<tr>
+<td><code>ShortLinksApi</code></td>
+<td><code>shortUrlsLinks</code></td>
+<td><strong>GET</strong> /api/short-url/links</td>
+<td>List of short links</td>
+</tr>
+<tr>
+<td><code>StopListApi</code></td>
+<td><code>stoplistAdd</code></td>
+<td><strong>POST</strong> /api/stoplist/attach</td>
+<td>Add contacts to stop list</td>
+</tr>
+<tr>
+<td><code>StopListApi</code></td>
+<td><code>stoplistItems</code></td>
+<td><strong>GET</strong> /api/stoplist</td>
+<td>List the contacts of stop lists</td>
+</tr>
+<tr>
+<td><code>StopListApi</code></td>
+<td><code>stoplistRemove</code></td>
+<td><strong>POST</strong> /api/stoplist/detach</td>
+<td>Remove contacts from stop list</td>
+</tr>
+<tr>
+<td><code>StopListApi</code></td>
+<td><code>stoplistSearch</code></td>
+<td><strong>GET</strong> /api/stoplist/search</td>
+<td>Search contacts in Stop lists</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>cancelOtp</code></td>
+<td><strong>POST</strong> /api/2fa/authentications/{id}/cancel</td>
+<td>Cancel the authentication session</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>otpList</code></td>
+<td><strong>GET</strong> /api/2fa/authentications</td>
+<td>List of authentication sessions</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>resendOtp</code></td>
+<td><strong>POST</strong> /api/2fa/authentications/otp/{id}/resend</td>
+<td>Resend the one-time code</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>sendOtp</code></td>
+<td><strong>POST</strong> /api/2fa/authentications/otp</td>
+<td>Send One-time password</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>statusOtp</code></td>
+<td><strong>GET</strong> /api/2fa/authentications/{id}</td>
+<td>Check authentication status</td>
+</tr>
+<tr>
+<td><code>TwoFAOTPApi</code></td>
+<td><code>verifyOtp</code></td>
+<td><strong>POST</strong> /api/2fa/authentications/otp/{id}/verify</td>
+<td>Check one-time Code</td>
+</tr>
+<tr>
+<td><code>TwoFATemplatesApi</code></td>
+<td><code>otpTemplate</code></td>
+<td><strong>GET</strong> /api/2fa/authentications/templates/{templateId}</td>
+<td>Get message template</td>
+</tr>
+<tr>
+<td><code>TwoFATemplatesApi</code></td>
+<td><code>otpTemplateCreate</code></td>
+<td><strong>POST</strong> /api/2fa/authentications/templates</td>
+<td>Create a message template</td>
+</tr>
+<tr>
+<td><code>TwoFATemplatesApi</code></td>
+<td><code>otpTemplateDelete</code></td>
+<td><strong>DELETE</strong> /api/2fa/authentications/templates/{templateId}</td>
+<td>Delete a message template</td>
+</tr>
+<tr>
+<td><code>TwoFATemplatesApi</code></td>
+<td><code>otpTemplateList</code></td>
+<td><strong>GET</strong> /api/2fa/authentications/templates</td>
+<td>List of message templates</td>
+</tr>
+</tbody>
+</table>
+<a id="authorization" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Authorization<a href="#authorization" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>All API calls (except <code>AuthApi.login</code>) require JWT Bearer token authentication.</p>
+<pre><code class="typescript"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">config</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Configuration</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">basePath:</span><span class="hl-1"> </span><span class="hl-2">&#39;https://one-api.bsg.world&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">accessToken:</span><span class="hl-1"> </span><span class="hl-2">&#39;your-jwt-token&#39;</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="documentation" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Documentation<a href="#documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li><a href="https://bsg.world/developers">BSG API Documentation</a></li>
+<li><a href="mailto:support@bsg.world">Support</a></li>
+</ul>
+<a id="license" class="tsd-anchor"></a><h2 class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>MIT</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#bsg-js-sdk"><span>bsg-<wbr/>js-<wbr/>sdk</span></a><ul><li><a href="#installation"><span>Installation</span></a></li><li><ul><li><a href="#requirements"><span>Requirements</span></a></li></ul></li><li><a href="#getting-started"><span>Getting <wbr/>Started</span></a></li><li><ul><li><a href="#commonjs-usage"><span>CommonJS <wbr/>Usage</span></a></li></ul></li><li><a href="#api-reference"><span>API <wbr/>Reference</span></a></li><li><ul><li><a href="#available-api-classes"><span>Available API <wbr/>Classes</span></a></li><li><a href="#all-endpoints"><span>All <wbr/>Endpoints</span></a></li></ul></li><li><a href="#authorization"><span>Authorization</span></a></li><li><a href="#documentation"><span>Documentation</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://bsg.world/developers" class="tsd-nav-link">BSG Developers</a><a href="https://github.com/bsgworld/js-sdk" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="modules.html">BSG JavaScript/TypeScript SDK - v0.1.0</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

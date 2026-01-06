@@ -1,0 +1,16 @@
+# Source files (included via package.json files field)
+# Keep only what's needed for npm package
+
+# Development files
+.github/
+.gitignore
+tsconfig*.json
+CONTRIBUTING.md
+
+# Test files
+test/
+coverage/
+
+# IDE
+.idea/
+.vscode/
