@@ -1,6 +1,6 @@
 {
   "name": "@bsgworld/js-sdk",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "BSG JavaScript/TypeScript SDK for One-API",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
